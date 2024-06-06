@@ -28,23 +28,13 @@ export default function DevExtremeForm({ onSubmit }) {
           console.log(`Fetching data for id: ${id}`);
           const response = await fetch(`http://localhost:3001/form-data/${id}`);
           console.log(`Response status: ${response.status}`);
-          // if (!response.ok) {
-          //   throw new Error('Network response was not ok');
-          // }
           const text = await response.text();
-          // console.log(`Response text: ${text}`);
           if (text) {
             const result = JSON.parse(text);
-            // console.log('Fetched data:', result);
             setFormData(result);
           }
-          //  else {
-          //   console.warn('Received empty response');
-          //   setError('111111No data found for the provided ID.');
-          // }
         } catch (error) {
           console.error('Error fetching data:', error);
-          // setError('Item not found or server error');
         }
       }
     };
@@ -67,13 +57,7 @@ export default function DevExtremeForm({ onSubmit }) {
         },
         body: JSON.stringify(formData)
       });
-
-      // if (!response.ok) {
-      //   throw new Error('Network response was not ok ' + response.statusText);
-      // }
-
       const data = await response.json();
-      // console.log("Response from server:", data);
 
       if (onSubmit) {
         onSubmit(formData);
